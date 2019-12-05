@@ -1,0 +1,13 @@
+section {
+  width: 350px;
+  height: 350px;
+  float: left;
+  /* border: 2px solid salmon; */
+  margin: 24px;
+}
+
+img {
+  width: 300px;
+  height: 300px;
+}
+
