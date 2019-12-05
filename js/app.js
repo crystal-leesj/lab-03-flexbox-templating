@@ -1,6 +1,6 @@
 'use strict'
 
-const allImages =[];
+let allImages =[];
 const myTemplate = Handlebars.compile($('#image-template').html());
 
 function HornImage(obj) {
@@ -9,7 +9,6 @@ function HornImage(obj) {
   this.horns = obj.horns;
   this.keyword = obj.keyword;
   this.description = obj.description;
-
 }
 
 // HornImage.prototype.renderWithJquery = function() {
@@ -49,7 +48,9 @@ HornImage.prototype.renderKeywords = function() {
   });
 }
 
+
 function readJsonData(page) {
+  allImages = [];
   $.get(`./data/page-${page}.json`, 'json')
     .then(data => {
       data.forEach(hornImgObj => {
@@ -68,10 +69,10 @@ function filterHornImg() {
   $('select').on('change', function() {
     let selectedKeyword = $(this).val();
     if(selectedKeyword !== 'default') {
-      $('section').hide();
-      $(`#horns[id = "${selectedKeyword}"]`).show();
+      $('div').hide();
+      $(`div.${selectedKeyword}`).show();
     } else {
-      $('section').show();
+      $('div').show();
     }
   });
 }
@@ -79,9 +80,8 @@ function filterHornImg() {
 function handlePage() {
   $('button').on('click', function() {
     $('#horns').empty();
-    console.log('+++++++++++++++handlePage');
-    console.log('$(this).attr :', $(this).attr('id'));
-    readJsonData($(this).attr('id'));
+    let pageNumber = parseInt($(this).attr('id'))
+    readJsonData(pageNumber);
   });
 }
 
