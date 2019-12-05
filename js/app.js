@@ -27,12 +27,30 @@ function HornImage(obj) {
 
 HornImage.prototype.renderWithHandlebars = function(){
   const myHtml = myTemplate(this);
-  console.log(myHtml);
+  // console.log(myHtml);
   $('#horns').append(myHtml);
 };
 
-function readJsonData() {
-  $.get('./data/page-1.json', 'json')
+HornImage.prototype.renderKeywords = function() {
+  let filterKeywords = [];
+  // remove all elements except for first one
+  $('option').not(':first').remove();
+  allImages.forEach(image => {
+    if (!filterKeywords.includes(image.keyword)) {
+      filterKeywords.push(image.keyword);
+    }
+  });
+
+  filterKeywords.sort();
+
+  filterKeywords.forEach(keyword => {
+    let optionTag = `<option value="${keyword}">${keyword}</option>`;
+    $('select').append(optionTag);
+  });
+}
+
+function readJsonData(page) {
+  $.get(`./data/page-${page}.json`, 'json')
     .then(data => {
       data.forEach(hornImgObj => {
         allImages.push(new HornImage(hornImgObj));
@@ -41,17 +59,39 @@ function readJsonData() {
     .then(() => {
       allImages.forEach(image =>{
         image.renderWithHandlebars();
-        // image.renderKeywords();
+        image.renderKeywords();
       })
     })
+}
+
+function filterHornImg() {
+  $('select').on('change', function() {
+    let selectedKeyword = $(this).val();
+    if(selectedKeyword !== 'default') {
+      $('section').hide();
+      $(`#horns[id = "${selectedKeyword}"]`).show();
+    } else {
+      $('section').show();
+    }
+  });
+}
+
+function handlePage() {
+  $('button').on('click', function() {
+    $('#horns').empty();
+    console.log('+++++++++++++++handlePage');
+    console.log('$(this).attr :', $(this).attr('id'));
+    readJsonData($(this).attr('id'));
+  });
 }
 
 
 console.log('allImages :', allImages);
 
 $(() => {
-  readJsonData();
-  // filterHornImg();
+  readJsonData(1);
+  filterHornImg();
+  handlePage();
 })
 
 

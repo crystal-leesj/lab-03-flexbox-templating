@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layouts.css">
+  <link rel="stylesheet" href="css/modules.css">
+  <link href="https://fonts.googleapis.com/css?family=Solway&display=swap" rel="stylesheet">
   <script id="image-template" type="text/x-handlebars-template">
-    <div class="{{ keyword }}">
+    <div id="{{ keyword }}" class="image-container">
       <h2>{{ title }}</h2>
       <img src="{{ image_url }}" alt="{{ title }}" />
       <p>{{ description }}</p>
@@ -19,6 +22,8 @@
     <select>
       <option value="default">Filter by Keyword</option>
     </select>
+    <button id="1">Page 1</button>
+    <button id="2">Page 2</button>
   </header>
   <main>
     <section id="horns"></section>
