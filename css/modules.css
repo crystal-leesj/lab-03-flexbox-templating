@@ -8,20 +8,39 @@ h1 {
 
 h2 {
   font-size: 2em;
+  text-align: center;
 }
 
 p {
   font-size: 1.4em;
+  text-align: center;
 }
 
 #photo-template {
   display: none;
 }
 
+#nav{
+  display: flex;
+  justify-content: flex-end;
+}
+
 select{
-  margin-top: 15px
+  height: 40px;
+  margin-top: 5px;
+  background-color: rgba(64, 231, 162, 0.548);
+  font-size: 1.1em;
 }
 
 button{
-  margin-top: 10px;
+  height: 40px;
+  margin-top: 5px;
+  background-color: rgba(64, 231, 162, 0.548);
+  font-size: 1.2em;
+}
+
+section{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
