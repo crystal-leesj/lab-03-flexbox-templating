@@ -1,13 +1,17 @@
 #hornImg {
   width: 350px;
   height: 350px;
-  float: left;
+  /* float: left; */
   /* border: 2px solid salmon; */
   margin: 24px;
 }
 
 img {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
+  margin-left: 50px;
+  margin-bottom: 30px;
+  /* display: flex;
+  justify-content: space-evenly; */
 }
 

@@ -13,4 +13,5 @@ body, html {
 header {
   display: flex;
   text-align: center;
+  height: 50px;
 }
