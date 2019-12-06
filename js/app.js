@@ -1,6 +1,6 @@
 'use strict'
 
-let allImages =[];
+let allImages = [];
 const myTemplate = Handlebars.compile($('#image-template').html());
 
 function HornImage(obj) {
@@ -10,19 +10,6 @@ function HornImage(obj) {
   this.keyword = obj.keyword;
   this.description = obj.description;
 }
-
-// HornImage.prototype.renderWithJquery = function() {
-//   console.log('renderWithJquery');
-//   const clone = $('#image-template').clone();
-//   console.log('clone :', clone);
-//   clone.find('h2').text(this.title);
-//   clone.find('img').attr('src', this.image_url);
-//   clone.find('img').attr('alt', this.title);
-//   clone.find('p').text(this.description);
-//   $('#horns').append(clone);
-
-//   // clone.attr('class', this.keyword);
-// }
 
 HornImage.prototype.renderWithHandlebars = function(){
   const myHtml = myTemplate(this);
@@ -48,9 +35,12 @@ HornImage.prototype.renderKeywords = function() {
   });
 }
 
+let page = '1';
 
 function readJsonData(page) {
+  // reset the allImage array to avoide the duplicates
   allImages = [];
+  console.log('readJsonData :', page);
   $.get(`./data/page-${page}.json`, 'json')
     .then(data => {
       data.forEach(hornImgObj => {
@@ -58,7 +48,7 @@ function readJsonData(page) {
       })
     })
     .then(() => {
-      allImages.forEach(image =>{
+      allImages.forEach(image => {
         image.renderWithHandlebars();
         image.renderKeywords();
       })
@@ -80,19 +70,29 @@ function filterHornImg() {
 function handlePage() {
   $('button').on('click', function() {
     $('#horns').empty();
-    let pageNumber = parseInt($(this).attr('id'))
+    let pageNumber = parseInt($( this).attr('id'))
     readJsonData(pageNumber);
   });
 }
 
-
-console.log('allImages :', allImages);
+function sortByTitle() {
+  $('#sortByTitle').on('click', function() {
+    allImages.sort(function(a,b) {
+      if(a.title > b.title) return 1;
+      if(a.title < b.title) return -1;
+      return 0;
+    })
+    console.log('NEW allImages :', allImages);
+    $('div').remove();
+    allImages.forEach(image => image.renderWithHandlebars());
+    $('div').hide();
+    $('div').show();
+  })
+}
 
 $(() => {
-  readJsonData(1);
+  readJsonData(page);
   filterHornImg();
   handlePage();
+  sortByTitle();
 })
-
-
-

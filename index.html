@@ -19,18 +19,19 @@
 <body>
   <header>
     <h1>The Gallery of Horns</h1>
-    <div id="nav">
+    <!-- <div id="nav"> -->
       <select>
         <option value="default">Filter by Keyword</option>
       </select>
-      <button id="1">Page 1</button>
-      <button id="2">Page 2</button>
-    </div>
+    <!-- </div> -->
+      <button class="pageChanger" id="1">Page 1</button>
+      <button class="pageChanger" id="2">Page 2</button>
+      <input type="button" id="sortByTitle" value="Sort by Title" />
   </header>
   <main>
     <section id="horns"></section>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
   <script
     src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
